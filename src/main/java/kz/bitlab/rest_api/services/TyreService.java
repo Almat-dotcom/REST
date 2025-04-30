@@ -1,15 +1,17 @@
 package kz.bitlab.rest_api.services;
 
+import kz.bitlab.rest_api.dto.TyreRequestDTO;
+import kz.bitlab.rest_api.dto.TyreResponseDTO;
 import kz.bitlab.rest_api.entity.Tyre;
 
 import java.util.List;
 
 public interface TyreService {
-    List<Tyre> getAll();
+    List<TyreResponseDTO> getAll();
 
     Tyre getById(Long id);
 
-    Tyre create(Tyre tyre);
+    Tyre create(TyreRequestDTO dto);
 
     Tyre update(Tyre tyre);
 

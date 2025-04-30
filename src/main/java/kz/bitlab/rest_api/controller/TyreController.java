@@ -1,11 +1,12 @@
 package kz.bitlab.rest_api.controller;
 
+import kz.bitlab.rest_api.dto.TyreRequestDTO;
+import kz.bitlab.rest_api.dto.TyreResponseDTO;
 import kz.bitlab.rest_api.entity.Tyre;
 import kz.bitlab.rest_api.services.TyreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class TyreController {
     private final TyreService tyreService;
 
     @GetMapping
-    public ResponseEntity<List<Tyre>> main(Model model) {
+    public ResponseEntity<List<TyreResponseDTO>> main(Model model) {
         if (tyreService.getAll().isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
@@ -38,12 +39,12 @@ public class TyreController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createTyre(@RequestBody Tyre tyre) {
-        if(tyre==null){
+    public ResponseEntity<?> createTyre(@RequestBody TyreRequestDTO dto) {
+        if(dto==null){
             throw new RuntimeException("Tyre is null");
         }
         else {
-            tyreService.create(tyre);
+            tyreService.create(dto);
             return new ResponseEntity<>(HttpStatus.CREATED);
 
         }

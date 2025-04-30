@@ -21,3 +21,6 @@ http://localhost:8080/v1/tyres/3?name=Mishlen
 100-199
 200-299
 
+//DTO Theme
+//DTO - Data Transfer Object
+

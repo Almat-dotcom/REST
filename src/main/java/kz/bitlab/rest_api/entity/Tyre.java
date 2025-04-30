@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -18,8 +20,8 @@ public class Tyre {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "tyre_name")
+    private String tyreName;
 
     @Column(name = "profile")
     private String profile;
@@ -30,4 +32,11 @@ public class Tyre {
     @Column(name = "manufacturer")
     private String manufacturer;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "tyre_and_categories",
+            joinColumns = @JoinColumn(name = "tyre_id"),
+            inverseJoinColumns = @JoinColumn(name = "tyre_category_id")
+    )
+    private List<TyreCategory> categories;
 }
