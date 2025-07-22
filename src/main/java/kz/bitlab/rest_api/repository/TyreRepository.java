@@ -1,4 +1,4 @@
-package kz.bitlab.rest_api.repositories;
+package kz.bitlab.rest_api.repository;
 
 import kz.bitlab.rest_api.entity.Tyre;
 import org.springframework.data.jpa.repository.JpaRepository;
