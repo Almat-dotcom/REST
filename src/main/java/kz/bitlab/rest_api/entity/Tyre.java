@@ -26,4 +26,8 @@ public class Tyre {
 
     @Column(name = "manufacturer")
     private String manufacturer;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "country_id")
+    private Country country;
 }

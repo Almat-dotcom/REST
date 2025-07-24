@@ -1,5 +1,6 @@
 package kz.bitlab.rest_api.controller;
 
+import kz.bitlab.rest_api.dto.*;
 import kz.bitlab.rest_api.entity.Tyre;
 import kz.bitlab.rest_api.service.TyreService;
 import lombok.RequiredArgsConstructor;
@@ -17,18 +18,18 @@ public class TyreController {
     private final TyreService tyreService;
 
     @GetMapping()
-    public ResponseEntity<List<Tyre>> getAll() {
+    public ResponseEntity<List<TyreListDTO>> getAll() {
         return new ResponseEntity<>(tyreService.getTyres(), HttpStatus.I_AM_A_TEAPOT);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Tyre> getTyre(@PathVariable Long id) {
+    public ResponseEntity<TyreFullDTO> getTyre(@PathVariable Long id) {
         return new ResponseEntity<>(tyreService.getTyre(id), HttpStatus.ACCEPTED);
     }
 
     @PostMapping
-    public ResponseEntity<Tyre> createTyre(@RequestBody Tyre tyre) {
-        Tyre result = tyreService.addTyre(tyre);
+    public ResponseEntity<TyreCreateResultDTO> createTyre(@RequestBody TyreCreateDTO dto) {
+        TyreCreateResultDTO result = tyreService.addTyre(dto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
@@ -40,7 +41,7 @@ public class TyreController {
     }
 
     @PutMapping
-    public ResponseEntity<Tyre> uodateTyre(@RequestBody Tyre tyre) {
+    public ResponseEntity<TyreFullDTO> updateTyre(@RequestBody TyreUpdateDTO tyre) {
         return new ResponseEntity<>(tyreService.updateTyre(tyre.getId(), tyre), HttpStatus.OK);
     }
 }
