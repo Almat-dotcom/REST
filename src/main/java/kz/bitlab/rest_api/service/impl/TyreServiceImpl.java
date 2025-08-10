@@ -3,6 +3,7 @@ package kz.bitlab.rest_api.service.impl;
 import jakarta.transaction.Transactional;
 import kz.bitlab.rest_api.dto.*;
 import kz.bitlab.rest_api.entity.Tyre;
+import kz.bitlab.rest_api.exception.TyreNotFoundException;
 import kz.bitlab.rest_api.mapper.TyreMapper;
 import kz.bitlab.rest_api.repository.CountryRepository;
 import kz.bitlab.rest_api.repository.TyreRepository;
@@ -15,9 +16,9 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
+//Junit+Mockito
 public class TyreServiceImpl implements TyreService {
     private final TyreRepository tyreRepository;
-    private final CountryRepository countryRepository;
     private final TyreMapper tyreMapper;
 
     @Override
@@ -35,7 +36,8 @@ public class TyreServiceImpl implements TyreService {
 
     @Override
     public TyreFullDTO getTyre(Long id) {
-        Tyre tyre = tyreRepository.findById(id).orElse(null);
+        Tyre tyre = tyreRepository.findById(id)
+                .orElseThrow(() -> new TyreNotFoundException("Tyre Not Found"));
 
         return tyreMapper.toFullDTO(tyre);
     }

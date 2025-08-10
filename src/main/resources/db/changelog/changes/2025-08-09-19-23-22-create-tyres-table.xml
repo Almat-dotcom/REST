@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet id="create-tyres-table" author="almat">
+        <createTable tableName="tyres">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="profile" type="varchar(255)"/>
+            <column name="price" type="integer"/>
+            <column name="manufacturer" type="varchar(255)"/>
+            <column name="country_id" type="bigint"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="tyres"
+                baseColumnNames="country_id"
+                constraintName="fk_countries_tyres"
+                referencedTableName="countries"
+                referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
