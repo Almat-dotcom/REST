@@ -19,12 +19,12 @@ public class TyreController {
 
     @GetMapping()
     public ResponseEntity<List<TyreListDTO>> getAll() {
-        return new ResponseEntity<>(tyreService.getTyres(), HttpStatus.I_AM_A_TEAPOT);
+        return new ResponseEntity<>(tyreService.getTyres(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<TyreFullDTO> getTyre(@PathVariable Long id) {
-        return new ResponseEntity<>(tyreService.getTyre(id), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(tyreService.getTyre(id), HttpStatus.OK);
     }
 
     @PostMapping
