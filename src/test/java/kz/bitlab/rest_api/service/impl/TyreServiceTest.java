@@ -53,9 +53,13 @@ class TyreServiceTest {
     void init() throws NoSuchFieldException, IllegalAccessException {
         mapperHelper = new MapperHelper(countryRepository);
 
-        inject(tyreMapper,"mapperHelper", mapperHelper);
-        inject(tyreMapper,"countryMapper", countryMapper);
+        Field f = tyreMapper.getClass().getDeclaredField("mapperHelper");
+        f.setAccessible(true);
+        f.set(tyreMapper, mapperHelper);
 
+        Field f2 = tyreMapper.getClass().getDeclaredField("countryMapper");
+        f2.setAccessible(true);
+        f2.set(tyreMapper, countryMapper);
 
         country = Country.builder().id(2L).name("Japan").build();
     }

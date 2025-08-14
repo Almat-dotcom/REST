@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet id="insert-roles" author="almat">
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN"></column>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_MANAGER"></column>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_USER"></column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-users" author="almat">
+        <insert tableName="users">
+            <column name="username" value="almat"></column>
+            <column name="full_name" value="ALmat S"></column>
+            <column name="password" value="$2a$15$iUemBN0FGiXBNsm3oJFR6eCDNb0yCRUQGaQFfMKKv865Kb8voApT2"></column>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="arman"></column>
+            <column name="full_name" value="Arman S"></column>
+            <column name="password" value="$2a$15$rXq6/wZG6qK2JNICnv.xZulFuoVaT4l/1B8jVYZ4qlfzZqJE6Y79K"></column>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="zhaksylyk"></column>
+            <column name="full_name" value="Zhaksylyk S"></column>
+            <column name="password" value="$2a$15$9H4.9H6znLbLEAmkmwfuO.Um1nzlwGeyTTi.myOVxNx2WGMKTEGH6"></column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-user-roles" author="almat">
+        <insert tableName="users_roles">
+            <column name="user_id" valueComputed="(SELECT id from users where username='almat')"></column>
+            <column name="role_id" valueComputed="(SELECT id from roles where name='ROLE_ADMIN')"></column>
+        </insert>
+        <insert tableName="users_roles">
+            <column name="user_id" valueComputed="(SELECT id from users where username='zhaksylyk')"></column>
+            <column name="role_id" valueComputed="(SELECT id from roles where name='ROLE_MANAGER')"></column>
+        </insert>
+        <insert tableName="users_roles">
+            <column name="user_id" valueComputed="(SELECT id from users where username='arman')"></column>
+            <column name="role_id" valueComputed="(SELECT id from roles where name='ROLE_USER')"></column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

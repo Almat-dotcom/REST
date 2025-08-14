@@ -10,11 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Tyre {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Tyre extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
